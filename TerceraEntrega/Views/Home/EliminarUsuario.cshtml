@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "EliminarUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div>
+        <h3>Eliminar Usuario</h3>
+        <!-- Formulario para ingresar la cédula del usuario a eliminar -->
+        <form action="@Url.Action("VerificarEliminarUsuario", "Home")" method="post">
+            <label>Cédula del usuario:</label>
+            <input type="text" name="cedula" />
+            <input type="submit" value="Eliminar" />
+        </form>
+        <!-- Mensaje de notificación de error o éxito -->
+        @if (!string.IsNullOrEmpty(ViewBag.Notificacion))
+        {
+            <div class="alert alert-danger">@ViewBag.Notificacion</div>
+        }
+    </div>
+</body>
+</html>
+

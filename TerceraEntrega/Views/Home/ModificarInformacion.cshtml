@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "ModificarInformacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modificar Usuario</title>
+</head>
+<body>
+    <div>
+        <h3>Modificar Usuario</h3>
+        <div>
+            <a href="@Url.Action("ActualizarInformacion", "Home")" class="btn btn-primary">Actualizar Información</a>
+        </div>
+        <div style="margin-top: 10px;">
+            <a href="@Url.Action("EliminarUsuario", "Home")" class="btn btn-danger">Eliminar Usuario</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "ConfirmacionEliminación";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmación de Eliminación</title>
+</head>
+<body>
+    <div>
+        <h3>Confirmación de Eliminación</h3>
+        <!-- Mensaje de éxito de eliminación -->
+        @if (!string.IsNullOrEmpty(ViewBag.Notificacion))
+        {
+            <div class="alert alert-success">@ViewBag.Notificacion</div>
+        }
+    </div>
+</body>
+</html>
+

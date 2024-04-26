@@ -1,0 +1,59 @@
+﻿@model TerceraEntrega.Models.ListaUsuario
+@{
+    ViewBag.Title = "MostrarActualizarUsuario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html>
+<head>
+    <title>Actualizar Usuario</title>
+</head>
+<body>
+    <div>
+    <h3>Usuario actualizado con éxito</h3>
+    <form action="ListaUsuario/ListaUsuario" method="post">
+        <table>
+
+            <tr>
+                <td><label>Cedula: @Model.Cedula </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Nombre: @Model.Nombre </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Apellido: @Model.Apellido </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Periodo consumo de agua: @Model.Periodo_consumo </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Estrato: @Model.Estrato </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Meta de ahorro de energía: @Model.Meta_ahorro_energia </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Consumo actual de energía: @Model.Consumo_actual_energia </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Promedio consumo de agua: @Model.Promedio_consumo_agua </label></td>
+            </tr>
+
+            <tr>
+                <td><label>Consumo actual de agua: @Model.Consumo_actual_agua </label></td>
+            </tr>
+
+        </table>
+
+    </form>
+
+    </div>
+</body>
+</html>

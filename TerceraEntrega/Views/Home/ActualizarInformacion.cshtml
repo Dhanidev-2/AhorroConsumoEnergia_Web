@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "ActualizarInformacion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<html>
+
+<body>
+    <div>
+        <h3>Modificar usuario</h3>
+        @if (!string.IsNullOrEmpty(ViewBag.Notificacion))
+        {
+            <div class="alert alert-danger">@ViewBag.Notificacion</div>
+        }
+        @using (Html.BeginForm("MostrarActualizarUsuario", "Home", FormMethod.Post))
+        {
+            <table>
+
+                <tr>
+                    <td><label> Cedula:  </label></td>
+                    <td><input type="text" name="cedula" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Nombre:  </label></td>
+                    <td><input type="text" name="nombre" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
+                </tr>
+                <tr>
+                    <td><label> Apellido:  </label></td>
+                    <td><input type="text" name="apellido" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
+                </tr>
+                <tr>
+                    <td><label> Periodo de consumo:  </label></td>
+                    <td><input type="text" name="Pconsumo" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Estrato:  </label></td>
+                    <td><input type="text" name="estrato" pattern="[0-6]+" oninput="this.value=this.value.replace(/[^0-6]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Meta ahorro de energía:  </label></td>
+                    <td><input type="text" name="MHenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Consumo actual de energía:  </label></td>
+                    <td><input type="text" name="CAenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Promedio del consumo de agua:  </label></td>
+                    <td><input type="text" name="PCagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+                <tr>
+                    <td><label> Consumo actual de agua:  </label></td>
+                    <td><input type="text" name="CAagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+                </tr>
+
+
+            </table>
+
+            <tr>
+                <td><input type="submit" name="enviar" value="Enviar" /></td>
+            </tr>
+
+        }
+
+    </div>
+</body>
+</html>
