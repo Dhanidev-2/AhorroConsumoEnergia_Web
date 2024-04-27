@@ -1,4 +1,5 @@
-﻿@{
+﻿@model TerceraEntrega.Models.ListaUsuario
+@{
     ViewBag.Title = "ActualizarInformacion";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,60 +9,96 @@
 
 <body>
     <div>
-        <h3>Modificar usuario</h3>
+        <h3>Actualizar información del usuario</h3>
+        <style>
+            .boton-azul {
+                background-color: #35B2FF;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+                border-radius: 6px;
+                border: 2px solid #35B2FF;
+            }
+
+                .boton-azul:hover {
+                    background-color: white;
+                    color: #35B2FF;
+                }
+        </style>
+        <!-- Formulario para ingresar la cédula del usuario para actualizar -->
+        <form action="@Url.Action("VerificarActualizarUsuario", "Home")" method="post">
+            <label>Cédula del usuario:</label>
+            <input type="text" name="cedula" />
+            <input type="submit" value="Actualizar" class="boton-azul" />
+        </form>
+        <!-- Mensaje de notificación de error o éxito -->
         @if (!string.IsNullOrEmpty(ViewBag.Notificacion))
         {
             <div class="alert alert-danger">@ViewBag.Notificacion</div>
         }
-        @using (Html.BeginForm("MostrarActualizarUsuario", "Home", FormMethod.Post))
-        {
-            <table>
 
-                <tr>
-                    <td><label> Cedula:  </label></td>
-                    <td><input type="text" name="cedula" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Nombre:  </label></td>
-                    <td><input type="text" name="nombre" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
-                </tr>
-                <tr>
-                    <td><label> Apellido:  </label></td>
-                    <td><input type="text" name="apellido" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
-                </tr>
-                <tr>
-                    <td><label> Periodo de consumo:  </label></td>
-                    <td><input type="text" name="Pconsumo" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Estrato:  </label></td>
-                    <td><input type="text" name="estrato" pattern="[0-6]+" oninput="this.value=this.value.replace(/[^0-6]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Meta ahorro de energía:  </label></td>
-                    <td><input type="text" name="MHenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Consumo actual de energía:  </label></td>
-                    <td><input type="text" name="CAenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Promedio del consumo de agua:  </label></td>
-                    <td><input type="text" name="PCagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-                <tr>
-                    <td><label> Consumo actual de agua:  </label></td>
-                    <td><input type="text" name="CAagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
-                </tr>
-
-
-            </table>
+        <!--
+    @using (Html.BeginForm("ConfirmacionActualizacion", "Home", FormMethod.Post))
+    {
+        <table>
 
             <tr>
-                <td><input type="submit" name="enviar" value="Enviar" /></td>
+                <td><label> Cedula:  </label></td>
+                <td><input type="text" name="cedula" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Nombre:  </label></td>
+                <td><input type="text" name="nombre" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
+            </tr>
+            <tr>
+                <td><label> Apellido:  </label></td>
+                <td><input type="text" name="apellido" pattern="[a-zA-Z.,:;()¿?¡! ñ]+" /></td>
+            </tr>
+            <tr>
+                <td><label> Periodo de consumo:  </label></td>
+                <td><input type="text" name="Pconsumo" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Estrato:  </label></td>
+                <td><input type="text" name="estrato" pattern="[0-6]+" oninput="this.value=this.value.replace(/[^0-6]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Meta ahorro de energía:  </label></td>
+                <td><input type="text" name="MHenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Consumo actual de energía:  </label></td>
+                <td><input type="text" name="CAenergia" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Promedio del consumo de agua:  </label></td>
+                <td><input type="text" name="PCagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
+            </tr>
+            <tr>
+                <td><label> Consumo actual de agua:  </label></td>
+                <td><input type="text" name="CAagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" /></td>
             </tr>
 
-        }
+
+        </table>
+
+        <tr>
+            <td><input type="submit" name="enviar" value="Enviar" class="boton-azul" /></td>
+        </tr>
+
+    }
+
+    @if (!string.IsNullOrEmpty(ViewBag.Notificacion))
+    {
+        <div class="alert alert-danger">@ViewBag.Notificacion</div>
+    }-->
 
     </div>
 </body>

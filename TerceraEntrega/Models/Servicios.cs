@@ -85,5 +85,32 @@ namespace TerceraEntrega.Models
             ListaDeUsuarios.Add(UsuarioNuevo);
 
         }
+
+        /*
+        public void ActualizarUsuario(ListaUsuario usuarioActualizado)
+        {
+            
+            ListaUsuario usuarioExistente = Verificar_Usuario(usuarioActualizado.Cedula);
+
+            if (usuarioExistente != null)
+            {
+                // Actualizar los campos del usuario existente con los valores del usuario actualizado
+                usuarioExistente.nombre = usuarioActualizado.nombre;
+                usuarioExistente.apellido = usuarioActualizado.apellido;
+                usuarioExistente.periodo_consumo = usuarioActualizado.periodo_consumo;
+                usuarioExistente.estrato = usuarioActualizado.estrato;
+                usuarioExistente.meta_ahorro_energia = usuarioActualizado.meta_ahorro_energia;
+                usuarioExistente.consumo_actual_energia = usuarioActualizado.consumo_actual_energia;
+                usuarioExistente.promedio_consumo_agua = usuarioActualizado.promedio_consumo_agua;
+                usuarioExistente.consumo_actual_agua = usuarioActualizado.consumo_actual_agua;
+            }
+            else
+            {
+                // Si el usuario no se encuentra en la lista, puedes lanzar una excepción o manejarlo según lo necesites
+                throw new InvalidOperationException("El usuario no existe en la lista");
+            }
+        }*/
+
+
     }
 }

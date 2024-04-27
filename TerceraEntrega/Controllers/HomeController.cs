@@ -76,7 +76,7 @@ namespace TerceraEntrega.Controllers
             return View();
         }
 
-        //------------Actualizar estrato--------------
+        //------------Actualizar información--------------
 
         public ActionResult ActualizarInformacion()
         {
@@ -84,100 +84,81 @@ namespace TerceraEntrega.Controllers
             return View();
         }
 
-        public ActionResult BuscarPorCedula(int cedula)
+        public ActionResult VerificarActualizarUsuario(int cedula)
         {
             ListaUsuario usuario = Servicios.Verificar_Usuario(cedula);
             if (usuario == null)
             {
-                TempData["Notificacion"] = "El usuario no se encuentra en el sistema";
+                TempData["ActualizarInformacion"] = "El usuario no se encuentra en el sistema";
                 return RedirectToAction("ActualizarInformacion");
             }
             else
             {
-                TempData["idMomentaneoEstrato"] = usuario.Cedula.ToString();
-                TempData["UsuarioEncontrado"] = usuario; // Almacena el usuario encontrado en TempData
-                return RedirectToAction("MostrarActualizarUsuario");
+                TempData["UsuarioActualizar"] = usuario; // Guarda el usuario en TempData para usarlo en la vista de confirmación
+                return RedirectToAction("ConfirmacionActualizacion");
             }
         }
 
-        public ActionResult BorrarUsuarioYActualizarlo()
+
+
+        public ActionResult ConfirmacionActualizacion()
         {
-            // Verificr si el usuario fue encontrado en la función BuscarPorCedula
-            if (TempData["UsuarioEncontrado"] != null)
-            {
-                ListaUsuario usuario = (ListaUsuario)TempData["UsuarioEncontrado"];
-
-                // Elimina el usuario encontrado
-                Servicios.Eliminar.EliminarUsuarioPorCc(usuario.Cedula); // Utiliza el método para eliminar usuario por cédula
-
-                // Obtiene los campos actualizados del formulario
-                string nombre = Request.Form["nombre"];
-                string apellido = Request.Form["apellido"];
-                string periodoConsumoStr = Request.Form["Pconsumo"];
-                int? periodoConsumo = !string.IsNullOrEmpty(periodoConsumoStr) ? Convert.ToInt32(periodoConsumoStr) : (int?)null;
-                string estratoStr = Request.Form["estrato"];
-                int? estrato = !string.IsNullOrEmpty(estratoStr) ? Convert.ToInt32(estratoStr) : (int?)null;
-                string metaAhorroEnergiaStr = Request.Form["MHenergia"];
-                int? metaAhorroEnergia = !string.IsNullOrEmpty(metaAhorroEnergiaStr) ? Convert.ToInt32(metaAhorroEnergiaStr) : (int?)null;
-                string consumoActualEnergiaStr = Request.Form["CAenergia"];
-                int? consumoActualEnergia = !string.IsNullOrEmpty(consumoActualEnergiaStr) ? Convert.ToInt32(consumoActualEnergiaStr) : (int?)null;
-                string promedioConsumoAguaStr = Request.Form["PCagua"];
-                int? promedioConsumoAgua = !string.IsNullOrEmpty(promedioConsumoAguaStr) ? Convert.ToInt32(promedioConsumoAguaStr) : (int?)null;
-                string consumoActualAguaStr = Request.Form["CAagua"];
-                int? consumoActualAgua = !string.IsNullOrEmpty(consumoActualAguaStr) ? Convert.ToInt32(consumoActualAguaStr) : (int?)null;
-
-                ListaUsuario nuevoUsuario = new ListaUsuario(
-                    usuario.Cedula,
-                    string.IsNullOrEmpty(nombre) ? usuario.Nombre : nombre,
-                    string.IsNullOrEmpty(apellido) ? usuario.Apellido : apellido,
-                    periodoConsumo ?? usuario.Periodo_consumo,
-                    estrato ?? usuario.Estrato,
-                    metaAhorroEnergia ?? usuario.Meta_ahorro_energia,
-                    consumoActualEnergia ?? usuario.Consumo_actual_energia,
-                    promedioConsumoAgua ?? usuario.Promedio_consumo_agua,
-                    consumoActualAgua ?? usuario.Consumo_actual_agua
-                );
-
-
-                // Agrega el nuevo usuario a la lista de usuarios
-                Servicios.ingresarUsuario(nuevoUsuario);
-
-                TempData["Notificacion"] = "El usuario se eliminó correctamente y se creó un nuevo usuario";
-            }
-            else
-            {
-                TempData["Notificacion"] = "No se encontró al usuario";
-            }
-
-            return RedirectToAction("ActualizarInformacion");
-        }
-
-        public ActionResult MostrarActualizarUsuario()
-        {
-            // Obtiene el usuario encontrado almacenado en TempData
-            ListaUsuario usuario = (ListaUsuario)TempData["UsuarioEncontrado"];
-
-            // Verifica si el usuario no es nulo antes de pasar a la vista
+            ListaUsuario usuario = TempData["UsuarioActualizar"] as ListaUsuario;
             if (usuario != null)
             {
-                // Pasa el usuario encontrado a la vista MostrarActualizarUsuario
                 return View(usuario);
             }
             else
             {
-                // Si el usuario es nulo, redirige o muestra un mensaje de error
-                return RedirectToAction("ActualizarInformacion"); // o cualquier otra acción adecuada
+                return RedirectToAction("ActualizarInformacion");
             }
-            /*// Obtener el usuario encontrado almacenado en TempData
-            ListaUsuario usuario = (ListaUsuario)TempData["UsuarioEncontrado"];
-            TempData["Notificacion"] = "El usuario ha sido actualizado";
-
-            // Pasar el usuario encontrado a la vista MostrarActualizarUsuario
-            return View(usuario);
-            ViewBag.Notificacion = TempData["UsuarioEncontrado"];
-            return View();*/
         }
 
+        /*
+
+        public ActionResult ActualizarInformacion(int cedula, string nombre, string apellido, int periodoConsumo, int estrato, int metaAhorroEnergia, int consumoActualEnergia, int promedioConsumoAgua, int consumoActualAgua)
+        {
+            // Lógica para actualizar la información del usuario en la base de datos
+            try
+            {
+                // Obtener el usuario a actualizar
+                ListaUsuario usuario = Servicios.Verificar_Usuario(cedula);
+
+                if (usuario != null)
+                {
+                    // Actualizar los campos del usuario con los nuevos valores recibidos
+                    usuario.Nombre = nombre;
+                    usuario.Apellido = apellido;
+                    usuario.periodo_consumo = periodoConsumo;
+                    usuario.Estrato = estrato;
+                    usuario.meta_ahorro_energia = metaAhorroEnergia;
+                    usuario.consumo_actual_energia = consumoActualEnergia;
+                    usuario.promedio_consumo_agua = promedioConsumoAgua;
+                    usuario.consumo_actual_agua = consumoActualAgua;
+
+                    // Guardar los cambios en la base de datos
+                    Servicios.ActualizarUsuario(usuario);
+
+                    // Establecer un mensaje de éxito en TempData
+                    TempData["ActualizacionExitosa"] = "El usuario se actualizó correctamente";
+                }
+                else
+                {
+                    TempData["ActualizacionFallida"] = "No se pudo encontrar el usuario en la base de datos";
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar cualquier excepción que pueda ocurrir durante la actualización
+                TempData["ActualizacionFallida"] = "Ocurrió un error al intentar actualizar la información del usuario";
+                // Registrar o mostrar la excepción para fines de depuración
+                Console.WriteLine($"Error al actualizar el usuario: {ex.Message}");
+            }
+
+            // Redirigir a la acción ConfirmacionActualizacion
+            return RedirectToAction("ConfirmacionActualizacion");
+        }
+        */
 
 
         //------------Eliminar usuario--------------

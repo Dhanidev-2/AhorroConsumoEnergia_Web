@@ -10,12 +10,38 @@
 </head>
 <body>
     <div>
-        <h3>Modificar Usuario</h3>
-        <div>
-            <a href="@Url.Action("ActualizarInformacion", "Home")" class="btn btn-primary">Actualizar Información</a>
-        </div>
-        <div style="margin-top: 10px;">
-            <a href="@Url.Action("EliminarUsuario", "Home")" class="btn btn-danger">Eliminar Usuario</a>
+        <h3 style="text-align: center;">Modificar Usuario</h3>
+        <style>
+            .contenedor-botones {
+                display: flex;
+                justify-content: center; /* Centra los elementos horizontalmente */
+                gap: 10px; /* Define la separación entre los elementos */
+            }
+
+            .boton-azul {
+                background-color: #35B2FF;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 14px;
+                margin: 4px 2px;
+                transition-duration: 0.4s;
+                cursor: pointer;
+                border-radius: 6px;
+                border: 2px solid #35B2FF;
+            }
+
+                .boton-azul:hover {
+                    background-color: white;
+                    color: #35B2FF;
+                }
+        </style>
+        <div class="contenedor-botones">
+                <a href="@Url.Action("ActualizarInformacion", "Home")" class="boton-azul">Actualizar Información</a>
+                <a href="@Url.Action("EliminarUsuario", "Home")" class="boton-azul">Eliminar Usuario</a>
         </div>
     </div>
 </body>

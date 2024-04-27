@@ -185,7 +185,7 @@
     </Content>
     <Content Include="Views\Home\MenuAplicacion.cshtml" />
     <Content Include="Views\Home\CrearRegistro.cshtml" />
-    <Content Include="Views\Home\MostrarActualizarUsuario.cshtml" />
+    <Content Include="Views\Home\ConfirmacionActualizacion.cshtml" />
     <Content Include="Views\Home\ActualizarInformacion.cshtml" />
     <Content Include="Views\Home\ModificarInformacion.cshtml" />
     <Content Include="Views\Home\EliminarUsuario.cshtml" />
