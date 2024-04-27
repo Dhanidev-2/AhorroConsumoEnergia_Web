@@ -5,8 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using TerceraEntrega.Models;
 
-//ESTE ES
-
 namespace TerceraEntrega.Controllers
 {
     public class HomeController : Controller
