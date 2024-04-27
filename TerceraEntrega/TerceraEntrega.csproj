@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -129,7 +130,6 @@
     <Compile Include="Models\FuncionesCalculo.cs" />
     <Compile Include="Models\ListaUsuario.cs" />
     <Compile Include="Models\Servicios.cs" />
-    <Compile Include="Models\VefiricarInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +190,10 @@
     <Content Include="Views\Home\ModificarInformacion.cshtml" />
     <Content Include="Views\Home\EliminarUsuario.cshtml" />
     <Content Include="Views\Home\ConfirmacionEliminacion.cshtml" />
+    <Content Include="Views\Home\Estadisticas.cshtml" />
+    <Content Include="Views\Home\UsuarioSinRegistro.cshtml" />
+    <Content Include="Views\Error\Error404.cshtml" />
+    <Content Include="Views\Error\ErrorGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

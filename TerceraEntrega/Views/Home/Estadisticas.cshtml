@@ -1,0 +1,97 @@
+﻿@model TerceraEntrega.Models.Servicios
+@{
+    ViewBag.Title = "Estadísticas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Cálculos previos
+    var estratoMayorConsumo = TerceraEntrega.Models.FuncionesCalculo.EstratoMayorConsumoEnergia(Model.ListaDeUsuarios);
+    var estratoMenorConsumo = TerceraEntrega.Models.FuncionesCalculo.EstratoMenorConsumoEnergia(Model.ListaDeUsuarios);
+    var excesoAgua = TerceraEntrega.Models.FuncionesCalculo.CalcularExcesoAgua(Model.ListaDeUsuarios);
+    var descuentoEnergia = TerceraEntrega.Models.FuncionesCalculo.CalcularDescuentosEnergia(Model.ListaDeUsuarios);
+    var consumoAguaMayor = TerceraEntrega.Models.FuncionesCalculo.CalcularConsumoMayorPromedioAgua(Model.ListaDeUsuarios);
+    var mayorDesfase = TerceraEntrega.Models.FuncionesCalculo.CalcularMayorDesfaseEnergia(Model.ListaDeUsuarios);
+    var promedioConsumoEnergia = TerceraEntrega.Models.FuncionesCalculo.CalcularPromedioConsumoEnergiaClientes(Model.ListaDeUsuarios);
+    var estratoAhorroMayorCantidadAgua = TerceraEntrega.Models.FuncionesCalculo.CalcularEstratoAhorroMayorCantidadAgua(Model.ListaDeUsuarios);
+
+}
+
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>Total de clientes: @Model.ListaDeUsuarios.Count()</p>
+
+
+<h2>Resultados por usuario</h2>
+<div style="overflow-x: auto;">
+    <table class="table" style="width: 3000px;">
+
+        <thead>
+            <tr>
+                <th>Identificación</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Pago de energía</th>
+                <th>Pago de Agua</th>
+                <th>Factura</th>
+                <th>Exceso de agua por estrato (Resultado global) </th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var usuario in Model.ListaDeUsuarios)
+            {
+                <tr>
+
+                    <td>@usuario.Cedula</td>
+                    <td>@usuario.Nombre</td>
+                    <td>@usuario.Apellido</td>
+                    <td>@TerceraEntrega.Models.FuncionesCalculo.CalcularValorPagarEnergia(Model.ListaDeUsuarios, usuario.Cedula)$</td>
+                    <td>@TerceraEntrega.Models.FuncionesCalculo.CalcularValorPagarAgua(Model.ListaDeUsuarios, usuario.Cedula)$</td>
+                    <td>@TerceraEntrega.Models.FuncionesCalculo.CalcularValorPagarFactura(Model.ListaDeUsuarios, usuario.Cedula)$</td>
+                    <td>
+                        @{
+                            var porcentajesExcesoAgua = TerceraEntrega.Models.FuncionesCalculo.CalcularPorcentajeExcesoAguaPorEstrato(Model.ListaDeUsuarios);
+                            foreach (var porcentaje in porcentajesExcesoAgua)
+                            {
+                                <span>Estrato @porcentaje.Key: @porcentaje.Value %</span><br />
+                            }
+                        }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+<h2>Resultados generales</h2>
+<div style="overflow-x: auto;">
+    <table class="table" style="width: 3000px;">
+        <tr>
+        <thead>
+            <tr>
+                <th>Promedio consumo de energía</th>
+                <th>Usuario con mayor desfase de energía</th>
+                <th>Cuantos usuarios consumeron por encima del promedio de agua</th>
+                <th>Descuento de la  energía</th>
+                <th>Total exceso de agua m³ </th>
+                <th>Estrato con mayor consumo de energía </th>
+                <th>Estrato con menor consumo de energía </th>
+                <th>Estrato con mayor ahorro de agua </th>
+
+            </tr>
+        </thead>
+        <tr>
+            <td>@promedioConsumoEnergia</td>
+            <!--Acá va la linea que le comentamos en el documento de word-->
+            <td>@consumoAguaMayor</td>
+            <td>@descuentoEnergia</td>
+            <td>@excesoAgua</td>
+            <td>@estratoMayorConsumo</td>
+            <td>@estratoMenorConsumo</td>
+            <td>@estratoAhorroMayorCantidadAgua</td>
+
+        </tr>
+    </table>
+</div>

@@ -135,7 +135,7 @@ namespace TerceraEntrega_Test
 
             int contadorClientesEsperado = 1;
 
-            int contadorClientesActual = FuncionesCalculo.CalcularConsumoMayorPromedio(usuarios);
+            int contadorClientesActual = FuncionesCalculo.CalcularConsumoMayorPromedioAgua(usuarios);
 
             Assert.AreEqual(contadorClientesEsperado, contadorClientesActual);
         }

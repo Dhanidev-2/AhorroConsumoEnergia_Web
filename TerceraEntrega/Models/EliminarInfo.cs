@@ -34,30 +34,5 @@ namespace TerceraEntrega.Models
         }
     }
 
-    /*public void EliminarUsuarioPorCc(int Cc)
-    {
-        List<ListaUsuario> usuarios = Servicios.Usuarios;
-
-        ListaUsuario usuarioAEliminar = null;
-
-        foreach (ListaUsuario usuario in usuarios)
-        {
-            if (usuario.Cedula == Cc)
-            {
-                usuarioAEliminar = usuario;
-                break;
-            }
-        }
-
-        if (usuarioAEliminar != null)
-        {
-            usuarios.Remove(usuarioAEliminar);
-            Console.WriteLine($"El usuario con cédula {Cc} ha sido eliminado exitosamente.");
-        }
-        else
-        {
-            Console.WriteLine("El usuario no se encuentra en el sistema.");
-        }
-    }*/
 
 }

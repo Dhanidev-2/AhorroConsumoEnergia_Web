@@ -4,30 +4,27 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TerceraEntrega.Models;
 
-namespace TerceraEntrega
+namespace TerceraEntrega.Models
 {
     public class FuncionesCalculo
     {
-      
-        public static void CalcularValorPagarEnergia(List<ListaUsuario> usuario)
-        {
-            Console.Write("Ingrese el número de cédula del cliente: ");
-            int cedula = Convert.ToInt32(Console.ReadLine());
 
-            var clienteEncontrado = usuario.Find(x => x.Cedula == cedula);
+        public static int CalcularValorPagarEnergia(List<ListaUsuario> usuarios, int cedula)
+        {
+            var clienteEncontrado = usuarios.Find(x => x.Cedula == cedula);
 
             if (clienteEncontrado != null)
             {
-                int valorPagarEnergia = ValorPagarEnergia(clienteEncontrado.meta_ahorro_energia, clienteEncontrado.consumo_actual_energia);
-                Console.WriteLine($"Valor a pagar por servicios de energía: ${valorPagarEnergia}");
+                return ValorPagarEnergia(clienteEncontrado.meta_ahorro_energia, clienteEncontrado.consumo_actual_energia);
             }
             else
             {
-                Console.WriteLine("Cliente no encontrado.");
+                // Devolvemos un valor predeterminado en caso de que el cliente no sea encontrado
+                return 0;
             }
         }
+
 
         public static int ValorPagarEnergia(int metaAhorroEnergia, int consumoActualEnergia)
         {
@@ -38,23 +35,23 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularValorPagarAgua(List<ListaUsuario> usuario)
+        public static int CalcularValorPagarAgua(List<ListaUsuario> usuarios, int cedula)
         {
-            Console.Write("Ingrese el número de cédula del cliente: ");
-            int cedula = Convert.ToInt32(Console.ReadLine());
-
-            var clienteEncontrado = usuario.Find(x => x.Cedula == cedula);
+            var clienteEncontrado = usuarios.Find(x => x.Cedula == cedula);
 
             if (clienteEncontrado != null)
             {
-                int valorPagarAgua = ValorPagarAgua(clienteEncontrado.promedio_consumo_agua, clienteEncontrado.consumo_actual_agua);
-                Console.WriteLine($"Valor a pagar por servicios de energía: ${valorPagarAgua}");
+                return ValorPagarAgua(clienteEncontrado.Promedio_consumo_agua, clienteEncontrado.Consumo_actual_agua);
             }
             else
             {
-                Console.WriteLine("Cliente no encontrado.");
+                // Devolvemos un valor predeterminado en caso de que el cliente no sea encontrado
+                return 0;
             }
         }
+
+
+
 
         public static int ValorPagarAgua(int promedioConsumoAgua, int consumoActualAgua)
         {
@@ -71,11 +68,13 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularPromedioConsumoEnergiaClientes(List<ListaUsuario> usuarios)
+
+
+        public static double CalcularPromedioConsumoEnergiaClientes(List<ListaUsuario> usuarios)
         {
-            double promedioConsumoEnergia = PromedioConsumoEnergia(usuarios);
-            Console.WriteLine($"Promedio del consumo actual de energía: {promedioConsumoEnergia}");
+            return PromedioConsumoEnergia(usuarios);
         }
+
 
         public static double PromedioConsumoEnergia(List<ListaUsuario> usuarios)
         {
@@ -91,27 +90,25 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularValorPagarFactura(List<ListaUsuario> usuario)
+        public static int CalcularValorPagarFactura(List<ListaUsuario> usuarios, int cedula)
         {
-            Console.Write("Ingrese el número de cédula del cliente: ");
-            int cedula = Convert.ToInt32(Console.ReadLine());
-
-            var clienteEncontrado = usuario.Find(x => x.Cedula == cedula);
+            var clienteEncontrado = usuarios.Find(x => x.Cedula == cedula);
 
             if (clienteEncontrado != null)
             {
                 int valorPagarEnergia = ValorPagarEnergia(clienteEncontrado.meta_ahorro_energia, clienteEncontrado.consumo_actual_energia);
                 int valorPagarAgua = ValorPagarAgua(clienteEncontrado.promedio_consumo_agua, clienteEncontrado.consumo_actual_agua);
 
-                int totalFacturaServicios = ValorPagarFactura(valorPagarEnergia, valorPagarAgua);
-
-                Console.WriteLine($"Valor a pagar por servicios de energía: ${totalFacturaServicios}");
+                return ValorPagarFactura(valorPagarEnergia, valorPagarAgua);
             }
             else
             {
-                Console.WriteLine("Cliente no encontrado.");
+                // Devolvemos un valor predeterminado en caso de que el cliente no sea encontrado
+                return 0;
             }
         }
+
+
 
         public static int ValorPagarFactura(int valorPagarEnergia, int valorPagarAgua)
         {
@@ -157,6 +154,8 @@ namespace TerceraEntrega
         }
 
 
+
+
         public static int CalcularExcesoAgua(List<ListaUsuario> usuarios)
         {
             int totalExcesoAgua = 0;
@@ -179,16 +178,41 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularPorcentajeExcesoAguaPorEstrato(List<ListaUsuario> usuarios)
-        {
-            Dictionary<int, double> porcentajeExcesoAguaPorEstrato = PorcentajeExcesoAguaPorEstrato(usuarios);
 
-            Console.WriteLine("Porcentaje de consumo excesivo de agua por estrato:");
-            foreach (var estrato in porcentajeExcesoAguaPorEstrato.Keys)
+        public static Dictionary<int, double> CalcularPorcentajeExcesoAguaPorEstrato(List<ListaUsuario> usuarios)
+        {
+            Dictionary<int, double> porcentajeExcesoAguaPorEstrato = new Dictionary<int, double>();
+
+            // Inicializar todos los estratos con 0% de exceso de agua
+            foreach (var usuario in usuarios)
             {
-                Console.WriteLine($"Estrato {estrato}: {porcentajeExcesoAguaPorEstrato[estrato]}%");
+                int estrato = usuario.estrato;
+                if (!porcentajeExcesoAguaPorEstrato.ContainsKey(estrato))
+                {
+                    porcentajeExcesoAguaPorEstrato[estrato] = 0;
+                }
             }
+
+            // Cálculo del porcentaje de exceso de agua por estrato
+            foreach (var usuario in usuarios)
+            {
+                int promedioConsumoAgua = usuario.promedio_consumo_agua;
+                int consumoActualAgua = usuario.consumo_actual_agua;
+
+                if (consumoActualAgua > promedioConsumoAgua)
+                {
+                    int excesoAgua = consumoActualAgua - promedioConsumoAgua;
+                    int estrato = usuario.estrato;
+
+                    // Calcular el porcentaje de exceso de agua para este usuario y sumarlo al total del estrato
+                    double porcentajeExceso = (excesoAgua / (double)promedioConsumoAgua) * 100;
+                    porcentajeExcesoAguaPorEstrato[estrato] += porcentajeExceso;
+                }
+            }
+
+            return porcentajeExcesoAguaPorEstrato;
         }
+
 
         public static Dictionary<int, double> PorcentajeExcesoAguaPorEstrato(List<ListaUsuario> usuarios)
         {
@@ -228,7 +252,7 @@ namespace TerceraEntrega
         }
 
 
-        public static int CalcularConsumoMayorPromedio(List<ListaUsuario> usuarios)
+        public static int CalcularConsumoMayorPromedioAgua(List<ListaUsuario> usuarios)
         {
             int contadorClientes = 0;
 
@@ -247,20 +271,15 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularMayorDesfase(List<ListaUsuario> usuarios)
+
+
+        public static ListaUsuario CalcularMayorDesfaseEnergia(List<ListaUsuario> usuarios)
         {
             ListaUsuario usuarioMayorDesfase = MayorDesfase(usuarios);
 
-            if (usuarioMayorDesfase != null)
-            {
-                int desfase = usuarioMayorDesfase.consumo_actual_energia - usuarioMayorDesfase.meta_ahorro_energia;
-                Console.WriteLine($"El usuario con mayor desfase es {usuarioMayorDesfase.nombre} con un desfase de {desfase}.");
-            }
-            else
-            {
-                Console.WriteLine("No hay usuarios con desfase en el consumo de energía.");
-            }
+            return usuarioMayorDesfase;
         }
+
 
         public static ListaUsuario MayorDesfase(List<ListaUsuario> usuarios)
         {
@@ -287,10 +306,9 @@ namespace TerceraEntrega
         }
 
 
-        public static void CalcularEstratoAhorroMayorCantidadAgua(List<ListaUsuario> usuarios)
+        public static int CalcularEstratoAhorroMayorCantidadAgua(List<ListaUsuario> usuarios)
         {
-            int estratoMayorAhorro = EstratoAhorroMayorCantidadAgua(usuarios);
-            Console.WriteLine($"El estrato con mayor cantidad de agua ahorrada es el estrato {estratoMayorAhorro}.");
+            return EstratoAhorroMayorCantidadAgua(usuarios);
         }
 
         public static int EstratoAhorroMayorCantidadAgua(List<ListaUsuario> usuarios)
@@ -322,6 +340,8 @@ namespace TerceraEntrega
 
             return estratoMayorAhorro;
         }
+
+
 
 
         public static void CalcularEstratoMayorMenorConsumoEnergia(List<ListaUsuario> usuarios)
@@ -415,21 +435,13 @@ namespace TerceraEntrega
             return totalFacturaAgua;
         }
 
-        public static void CalcularMayorPeriodoConsumoAgua(List<ListaUsuario> usuarios, int periodoConsumo)
+        public static ListaUsuario CalcularMayorPeriodoConsumoAgua(List<ListaUsuario> usuarios, int periodoConsumo)
         {
             ListaUsuario usuarioMayorConsumo = MayorPeriodoConsumoAgua(usuarios, periodoConsumo);
-
-            if (usuarioMayorConsumo != null)
-            {
-                Console.WriteLine($"Cédula: {usuarioMayorConsumo.cedula}");
-                Console.WriteLine($"Nombre: {usuarioMayorConsumo.nombre}");
-                Console.WriteLine($"Apellido: {usuarioMayorConsumo.apellido}");
-            }
-            else
-            {
-                Console.WriteLine("No se encontró ningún usuario para el periodo de consumo ingresado.");
-            }
+            return usuarioMayorConsumo;
         }
+
+
 
         public static ListaUsuario MayorPeriodoConsumoAgua(List<ListaUsuario> usuarios, int periodoConsumo)
         {
@@ -450,6 +462,7 @@ namespace TerceraEntrega
             }
             return usuarioMayorConsumo;
         }
+
 
     }
 }

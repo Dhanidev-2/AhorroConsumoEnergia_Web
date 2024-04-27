@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using TerceraEntrega.Controllers;
 
 namespace TerceraEntrega
 {
@@ -19,5 +20,7 @@ namespace TerceraEntrega
                 defaults: new { controller = "Home", action = "MenuAplicacion", id = UrlParameter.Optional }
             );
         }
+
+
     }
 }
