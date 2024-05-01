@@ -7,11 +7,11 @@ namespace TerceraEntrega.Models
 {
     public class ListaUsuario
     {
-        public int cedula, periodo_consumo, estrato, meta_ahorro_energia, consumo_actual_energia, promedio_consumo_agua, consumo_actual_agua;
+        public int cedula, periodo_consumo, estrato, meta_ahorro_energia, consumo_actual_energia, promedio_consumo_agua, consumo_actual_agua, consumo_gas;
         public string nombre, apellido;
 
 
-        public ListaUsuario(int cedula, string nombre, string apellido, int periodo_consumo, int estrato, int meta_ahorro_energia, int consumo_actual_energia, int promedio_consumo_agua, int consumo_actual_agua)
+        public ListaUsuario(int cedula, string nombre, string apellido, int periodo_consumo, int estrato, int meta_ahorro_energia, int consumo_actual_energia, int promedio_consumo_agua, int consumo_actual_agua, int consumo_gas)
         {
             this.Cedula = cedula;
             this.Nombre = nombre;
@@ -22,6 +22,7 @@ namespace TerceraEntrega.Models
             this.Consumo_actual_energia = consumo_actual_energia;
             this.Promedio_consumo_agua = promedio_consumo_agua;
             this.Consumo_actual_agua = consumo_actual_agua;
+            this.Consumo_gas = consumo_gas;
         }
 
 
@@ -42,6 +43,8 @@ namespace TerceraEntrega.Models
         public string Nombre { get => nombre; set => nombre = value; }
 
         public string Apellido { get => apellido; set => apellido = value; }
+
+        public int Consumo_gas { get => consumo_gas; set => consumo_gas = value; }
 
     }
 }

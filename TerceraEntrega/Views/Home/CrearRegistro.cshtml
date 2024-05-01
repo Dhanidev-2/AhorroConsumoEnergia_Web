@@ -19,7 +19,7 @@
         {
             <div class="alert alert-danger">@ViewBag.Notificacion</div>
         }
-        @using (Html.BeginForm("Registrar", "Home", FormMethod.Post))
+        @using (Html.BeginForm("Registrar", "Home", FormMethod.Post)) //Envía los datos
         {
             <table>
 
@@ -58,6 +58,11 @@
                 <tr>
                     <td><label> * Consumo actual de agua:  </label></td>
                     <td><input type="text" name="CAagua" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" value=" " /></td>
+                </tr>
+
+                <tr>
+                    <td><label> * Consumo de gas:  </label></td>
+                    <td><input type="text" name="CGas" pattern="[0-9]+" oninput="this.value=this.value.replace(/[^0-9]/g,'');" value=" " /></td>
                 </tr>
 
             </table>

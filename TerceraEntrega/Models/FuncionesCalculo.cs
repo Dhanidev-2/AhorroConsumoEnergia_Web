@@ -463,6 +463,55 @@ namespace TerceraEntrega.Models
             return usuarioMayorConsumo;
         }
 
+        public static int CalcularConsumoGas(List<ListaUsuario> usuarios, int cedula)
+        {
+            var clienteEncontrado = usuarios.Find(x => x.Cedula == cedula);
+
+            if (clienteEncontrado != null)
+            {
+                return ConsumoGas(clienteEncontrado.consumo_gas);
+            }
+            else
+            {
+                // Devolvemos un valor predeterminado en caso de que el cliente no sea encontrado
+                return 0;
+            }
+        }
+
+
+        public static int ConsumoGas(int consumoGas)
+        {
+            int valorMetroCubico = 2543;
+            int valorParcial = consumoGas * valorMetroCubico;
+            return valorParcial;
+        }
+
+
+        public static Dictionary<int, ListaUsuario> CalcularUsuarioMayorPorPeriodoConsumo(List<ListaUsuario> usuarios)
+        {
+            Dictionary<int, ListaUsuario> usuariosMayorConsumoPorPeriodo = new Dictionary<int, ListaUsuario>();
+
+            // Itera sobre cada usuario para encontrar el usuario con mayor consumo de gas en cada periodo
+            foreach (var usuario in usuarios)
+            {
+                int periodoConsumo = usuario.periodo_consumo;
+                // Verifica si el periodo de consumo ya está en el diccionario
+                if (!usuariosMayorConsumoPorPeriodo.ContainsKey(periodoConsumo))
+                {
+                    usuariosMayorConsumoPorPeriodo[periodoConsumo] = usuario;
+                }
+                else
+                {
+                    // Si el periodo de consumo ya está en el diccionario compara el consumo de gas
+                    if (usuario.consumo_gas > usuariosMayorConsumoPorPeriodo[periodoConsumo].consumo_gas)
+                    {
+                        usuariosMayorConsumoPorPeriodo[periodoConsumo] = usuario;
+                    }
+                }
+            }
+
+            return usuariosMayorConsumoPorPeriodo;
+        }
 
     }
 }

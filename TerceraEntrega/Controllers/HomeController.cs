@@ -54,8 +54,9 @@ namespace TerceraEntrega.Controllers
             int consumo_actual_energia;
             int promedio_consumo_agua;
             int consumo_actual_agua;
+            int consumo_gas;
 
-            cedula = Convert.ToInt32(Request.Form["cedula"]);
+            cedula = Convert.ToInt32(Request.Form["cedula"]); //Obtiene el valor del campo del formulario usando el nombre
             nombre = Convert.ToString(Request.Form["nombre"]);
             apellido = Convert.ToString(Request.Form["apellido"]);
             periodo_consumo = string.IsNullOrEmpty(Request.Form["Pconsumo"]) ? 0 : Convert.ToInt32(Request.Form["Pconsumo"]);
@@ -64,6 +65,7 @@ namespace TerceraEntrega.Controllers
             consumo_actual_energia = string.IsNullOrEmpty(Request.Form["CAenergia"]) ? 0 : Convert.ToInt32(Request.Form["CAenergia"]);
             promedio_consumo_agua = string.IsNullOrEmpty(Request.Form["PCagua"]) ? 0 : Convert.ToInt32(Request.Form["PCagua"]);
             consumo_actual_agua = string.IsNullOrEmpty(Request.Form["CAagua"]) ? 0 : Convert.ToInt32(Request.Form["CAagua"]);
+            consumo_gas = string.IsNullOrEmpty(Request.Form["CGas"]) ? 0 : Convert.ToInt32(Request.Form["CGas"]);
 
 
 
@@ -74,7 +76,7 @@ namespace TerceraEntrega.Controllers
                 return RedirectToAction("CrearRegistro");
             }
 
-            ListaUsuario usuario = new ListaUsuario(cedula, nombre, apellido, periodo_consumo, estrato, meta_ahorro_energia, consumo_actual_energia, promedio_consumo_agua, consumo_actual_agua);
+            ListaUsuario usuario = new ListaUsuario(cedula, nombre, apellido, periodo_consumo, estrato, meta_ahorro_energia, consumo_actual_energia, promedio_consumo_agua, consumo_actual_agua, consumo_gas);
             Servicios.ingresarUsuario(usuario);
             return View(usuario);
         }

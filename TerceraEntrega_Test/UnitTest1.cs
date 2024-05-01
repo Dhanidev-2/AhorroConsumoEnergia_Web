@@ -37,9 +37,9 @@ namespace TerceraEntrega_Test
         public void TestPromedioConsumoEnergia()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             double promedio = (180 + 187 + 320) / 3.0;
 
@@ -64,9 +64,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularDescuentosEnergia()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int costoKilovatio = 850;
             int descuentoUsuario1 = 0;
@@ -84,9 +84,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularExcesoAgua()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int excesoAguaUsuario1 = usuarios[0].consumo_actual_agua - usuarios[0].promedio_consumo_agua;
             int excesoAguaUsuario2 = usuarios[1].consumo_actual_agua - usuarios[1].promedio_consumo_agua;
@@ -111,9 +111,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularPorcentajeExcesoAguaPorEstrato()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             Dictionary<int, double> porcentajeExcesoAguaPorEstrato = FuncionesCalculo.PorcentajeExcesoAguaPorEstrato(usuarios);
 
@@ -129,9 +129,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularConsumoMayorPromedio()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int contadorClientesEsperado = 1;
 
@@ -144,9 +144,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularMayorDesfase()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             ListaUsuario usuarioMayorDesfase = FuncionesCalculo.MayorDesfase(usuarios);
 
@@ -158,9 +158,9 @@ namespace TerceraEntrega_Test
         public void TestCalcularEstratoAhorroMayorCantidadAgua()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int estratoMayorAhorro = FuncionesCalculo.EstratoAhorroMayorCantidadAgua(usuarios);
 
@@ -173,9 +173,9 @@ namespace TerceraEntrega_Test
         public void TestEstratoMayorConsumoEnergia()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int estratoMayorConsumo = FuncionesCalculo.EstratoMayorConsumoEnergia(usuarios);
 
@@ -188,9 +188,9 @@ namespace TerceraEntrega_Test
         public void TestEstratoMenorConsumoEnergia()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int estratoMenorConsumo = FuncionesCalculo.EstratoMenorConsumoEnergia(usuarios);
 
@@ -203,9 +203,9 @@ namespace TerceraEntrega_Test
         public void TestTotalFacturasEnergia()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int totalFacturaEnergia = FuncionesCalculo.TotalFacturasEnergia(usuarios);
 
@@ -218,9 +218,9 @@ namespace TerceraEntrega_Test
         public void TestTotalFacturasAgua()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             int totalFacturaAgua = FuncionesCalculo.TotalFacturasAgua(usuarios);
 
@@ -233,9 +233,9 @@ namespace TerceraEntrega_Test
         public void TestMayorPeriodoConsumoAgua()
         {
             List<ListaUsuario> usuarios = new List<ListaUsuario>();
-            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20));
-            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30));
-            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25));
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 2, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 3, 4, 260, 320, 25, 25, 2));
 
             ListaUsuario resultado = FuncionesCalculo.MayorPeriodoConsumoAgua(usuarios, 3);
 
@@ -244,6 +244,36 @@ namespace TerceraEntrega_Test
             Assert.AreEqual("Usuario3", resultado.nombre);
             Assert.AreEqual("Apellido3", resultado.apellido);
         }
+
+        [TestMethod]
+        public void TestConsumoGas()
+        {
+            int consumoGas = 100;
+
+            int valorTotal = FuncionesCalculo.ConsumoGas(consumoGas);
+
+            Assert.AreEqual(254300, valorTotal);
+        }
+
+        [TestMethod]
+        public void TestCalcularUsuarioMayorPorPeriodoConsumo()
+        {
+            List<ListaUsuario> usuarios = new List<ListaUsuario>();
+            usuarios.Add(new ListaUsuario(3145, "Usuario1", "Apellido1", 1, 3, 150, 180, 25, 20, 2));
+            usuarios.Add(new ListaUsuario(8947, "Usuario2", "Apellido2", 1, 3, 190, 187, 25, 30, 3));
+            usuarios.Add(new ListaUsuario(9812, "Usuario3", "Apellido3", 2, 4, 260, 320, 25, 25, 2));
+
+            Dictionary<int, ListaUsuario> resultado = FuncionesCalculo.CalcularUsuarioMayorPorPeriodoConsumo(usuarios);
+
+            Assert.IsNotNull(resultado);
+
+            Assert.IsTrue(resultado.ContainsKey(1)); 
+            Assert.AreEqual(8947, resultado[1].cedula); 
+            Assert.IsTrue(resultado.ContainsKey(2)); 
+            Assert.AreEqual(9812, resultado[2].cedula);
+        }
+
+
 
     }
 }
