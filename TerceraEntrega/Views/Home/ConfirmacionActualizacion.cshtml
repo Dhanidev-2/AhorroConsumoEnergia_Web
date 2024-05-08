@@ -85,68 +85,69 @@
         <hr>
         <p>En los siguientes campos podrá actualizar el usuario:</p>
 
-        @using (Html.BeginForm("ActualizarInformacion", "Home", FormMethod.Post))
-        {
-            
-                <table>
-                    <tr>
-                        <td>Cédula:</td>
-                        <td>@Model.Cedula</td>
-                    </tr>
-                    <tr>
-                        <td>Nombre:</td>
-                        <td>
-                            <input type="text" name="nombre" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Apellido:</td>
-                        <td>
-                            <input type="text" name="apellido" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Periodo consumo de agua:</td>
-                        <td>
-                            <input type="text" name="Pconsumo" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Estrato:</td>
-                        <td>
-                            <input type="text" name="estrato" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Meta de ahorro de energía:</td>
-                        <td>
-                            <input type="text" name="MHenergia" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Consumo actual de energía:</td>
-                        <td>
-                            <input type="text" name="CAenergia" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Promedio consumo de agua:</td>
-                        <td>
-                            <input type="text" name="PCagua" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Consumo actual de agua:</td>
-                        <td>
-                            <input type="text" name="CAagua" />
-                        </td>
-                    </tr>
-                </table>
+        @using (Html.BeginForm("ActualizarUsuario", "Home", FormMethod.Post))
+         {
+
+        <input type="hidden" name="cedula" value="@Model.Cedula" />
+        <table>
+            <tr>
+                <td>Cédula:</td>
+                <td>@Model.Cedula</td>
+            </tr>
+            <tr>
+                <td>Nombre:</td>
+                <td>
+                    <input type="text" name="nombre" />
+                </td>
+            </tr>
+            <tr>
+                <td>Apellido:</td>
+                <td>
+                    <input type="text" name="apellido" />
+                </td>
+            </tr>
+            <tr>
+                <td>Periodo consumo de agua:</td>
+                <td>
+                    <input type="text" name="Pconsumo" />
+                </td>
+            </tr>
+            <tr>
+                <td>Estrato:</td>
+                <td>
+                    <input type="text" name="estrato" />
+                </td>
+            </tr>
+            <tr>
+                <td>Meta de ahorro de energía:</td>
+                <td>
+                    <input type="text" name="MHenergia" />
+                </td>
+            </tr>
+            <tr>
+                <td>Consumo actual de energía:</td>
+                <td>
+                    <input type="text" name="CAenergia" />
+                </td>
+            </tr>
+            <tr>
+                <td>Promedio consumo de agua:</td>
+                <td>
+                    <input type="text" name="PCagua" />
+                </td>
+            </tr>
+            <tr>
+                <td>Consumo actual de agua:</td>
+                <td>
+                    <input type="text" name="CAagua" />
+                </td>
+            </tr>
+        </table>
 
 
-                <input type="submit" value="Actualizar" class="boton-azul" />
+        <input type="submit" value="Actualizar" class="boton-azul" />
+
         }
-            
 
     </div>
 </body>

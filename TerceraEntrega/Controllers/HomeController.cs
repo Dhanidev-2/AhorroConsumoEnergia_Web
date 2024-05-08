@@ -111,6 +111,33 @@ namespace TerceraEntrega.Controllers
         }
 
 
+        public ActionResult ActualizarUsuario(int cedula, string nombre, string apellido, int Pconsumo, int estrato, int MHenergia, int CAenergia, int PCagua, int CAagua)
+        {
+            // Buscar el usuario por cedula
+            ListaUsuario usuario = Servicios.Verificar_Usuario(cedula);
+
+            // Si el usuario existe, actualizar los campos
+            if (usuario != null)
+            {
+                usuario.Nombre = nombre;
+                usuario.Apellido = apellido;
+                usuario.Periodo_consumo = Pconsumo;
+                usuario.Estrato = estrato;
+                usuario.Meta_ahorro_energia = MHenergia;
+                usuario.Consumo_actual_energia = CAenergia;
+                usuario.Promedio_consumo_agua = PCagua;
+                usuario.Consumo_actual_agua = CAagua;
+
+                TempData["ActualizarInformacion"] = "La información del usuario ha sido actualizada exitosamente";
+            }
+            else
+            {
+                TempData["ActualizarInformacion"] = "El usuario no se encuentra en el sistema";
+            }
+
+            return RedirectToAction("ActualizarInformacion");
+        }
+
 
         public ActionResult ConfirmacionActualizacion()
         {
