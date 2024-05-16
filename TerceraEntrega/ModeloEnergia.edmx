@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ENERGIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbConsumoAgua">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="int" Nullable="false" />
+          <Property Name="Promedio_consumo_agua" Type="int" Nullable="false" />
+          <Property Name="Consumo_actual_agua" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbConsumoGas">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Cedula" Type="int" Nullable="false" />
+          <Property Name="Consumo_gas" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbEnergiaConsumo">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="int" Nullable="false" />
+          <Property Name="Cedula" Type="int" Nullable="false" />
+          <Property Name="Periodo_consumo" Type="int" Nullable="false" />
+          <Property Name="Meta_ahorro_energia" Type="int" Nullable="false" />
+          <Property Name="Consumo_actual_energia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbUsuarios">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Cedula" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Apellido" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Estrato" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tbConsumoAgua_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbConsumoAgua" Type="Self.tbConsumoAgua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbConsumoAgua">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbConsumoGas_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbConsumoGas" Type="Self.tbConsumoGas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbConsumoGas">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEnergiaConsumo_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuarios" Multiplicity="1" />
+          <End Role="tbEnergiaConsumo" Type="Self.tbEnergiaConsumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbEnergiaConsumo">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ENERGIAModelStoreContainer">
+          <EntitySet Name="tbConsumoAgua" EntityType="Self.tbConsumoAgua" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbConsumoGas" EntityType="Self.tbConsumoGas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbEnergiaConsumo" EntityType="Self.tbEnergiaConsumo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbConsumoAgua_tbUsuarios" Association="Self.FK_tbConsumoAgua_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbConsumoAgua" EntitySet="tbConsumoAgua" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbConsumoGas_tbUsuarios" Association="Self.FK_tbConsumoGas_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbConsumoGas" EntitySet="tbConsumoGas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEnergiaConsumo_tbUsuarios" Association="Self.FK_tbEnergiaConsumo_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbEnergiaConsumo" EntitySet="tbEnergiaConsumo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ENERGIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbConsumoAgua">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Int32" Nullable="false" />
+          <Property Name="Promedio_consumo_agua" Type="Int32" Nullable="false" />
+          <Property Name="Consumo_actual_agua" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_tbConsumoAgua_tbUsuarios" FromRole="tbConsumoAgua" ToRole="tbUsuarios" />
+        </EntityType>
+        <EntityType Name="tbConsumoGa">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Cedula" Type="Int32" Nullable="false" />
+          <Property Name="Consumo_gas" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_tbConsumoGas_tbUsuarios" FromRole="tbConsumoGas" ToRole="tbUsuarios" />
+        </EntityType>
+        <EntityType Name="tbEnergiaConsumo">
+          <Key>
+            <PropertyRef Name="idUsuario" />
+          </Key>
+          <Property Name="idUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Cedula" Type="Int32" Nullable="false" />
+          <Property Name="Periodo_consumo" Type="Int32" Nullable="false" />
+          <Property Name="Meta_ahorro_energia" Type="Int32" Nullable="false" />
+          <Property Name="Consumo_actual_energia" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbUsuario" Relationship="Self.FK_tbEnergiaConsumo_tbUsuarios" FromRole="tbEnergiaConsumo" ToRole="tbUsuarios" />
+        </EntityType>
+        <EntityType Name="tbUsuario">
+          <Key>
+            <PropertyRef Name="Cedula" />
+          </Key>
+          <Property Name="Cedula" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Apellido" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Estrato" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tbConsumoAguas" Relationship="Self.FK_tbConsumoAgua_tbUsuarios" FromRole="tbUsuarios" ToRole="tbConsumoAgua" />
+          <NavigationProperty Name="tbConsumoGas" Relationship="Self.FK_tbConsumoGas_tbUsuarios" FromRole="tbUsuarios" ToRole="tbConsumoGas" />
+          <NavigationProperty Name="tbEnergiaConsumoes" Relationship="Self.FK_tbEnergiaConsumo_tbUsuarios" FromRole="tbUsuarios" ToRole="tbEnergiaConsumo" />
+        </EntityType>
+        <Association Name="FK_tbConsumoAgua_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbConsumoAgua" Type="Self.tbConsumoAgua" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbConsumoAgua">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbConsumoGas_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbConsumoGas" Type="Self.tbConsumoGa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbConsumoGas">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbEnergiaConsumo_tbUsuarios">
+          <End Role="tbUsuarios" Type="Self.tbUsuario" Multiplicity="1" />
+          <End Role="tbEnergiaConsumo" Type="Self.tbEnergiaConsumo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbUsuarios">
+              <PropertyRef Name="Cedula" />
+            </Principal>
+            <Dependent Role="tbEnergiaConsumo">
+              <PropertyRef Name="Cedula" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ENERGIAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbConsumoAguas" EntityType="Self.tbConsumoAgua" />
+          <EntitySet Name="tbConsumoGas" EntityType="Self.tbConsumoGa" />
+          <EntitySet Name="tbEnergiaConsumoes" EntityType="Self.tbEnergiaConsumo" />
+          <EntitySet Name="tbUsuarios" EntityType="Self.tbUsuario" />
+          <AssociationSet Name="FK_tbConsumoAgua_tbUsuarios" Association="Self.FK_tbConsumoAgua_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbConsumoAgua" EntitySet="tbConsumoAguas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbConsumoGas_tbUsuarios" Association="Self.FK_tbConsumoGas_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbConsumoGas" EntitySet="tbConsumoGas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbEnergiaConsumo_tbUsuarios" Association="Self.FK_tbEnergiaConsumo_tbUsuarios">
+            <End Role="tbUsuarios" EntitySet="tbUsuarios" />
+            <End Role="tbEnergiaConsumo" EntitySet="tbEnergiaConsumoes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ENERGIAModelStoreContainer" CdmEntityContainer="ENERGIAEntities">
+          <EntitySetMapping Name="tbConsumoAguas">
+            <EntityTypeMapping TypeName="ENERGIAModel.tbConsumoAgua">
+              <MappingFragment StoreEntitySet="tbConsumoAgua">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Promedio_consumo_agua" ColumnName="Promedio_consumo_agua" />
+                <ScalarProperty Name="Consumo_actual_agua" ColumnName="Consumo_actual_agua" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbConsumoGas">
+            <EntityTypeMapping TypeName="ENERGIAModel.tbConsumoGa">
+              <MappingFragment StoreEntitySet="tbConsumoGas">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Consumo_gas" ColumnName="Consumo_gas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbEnergiaConsumoes">
+            <EntityTypeMapping TypeName="ENERGIAModel.tbEnergiaConsumo">
+              <MappingFragment StoreEntitySet="tbEnergiaConsumo">
+                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Periodo_consumo" ColumnName="Periodo_consumo" />
+                <ScalarProperty Name="Meta_ahorro_energia" ColumnName="Meta_ahorro_energia" />
+                <ScalarProperty Name="Consumo_actual_energia" ColumnName="Consumo_actual_energia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbUsuarios">
+            <EntityTypeMapping TypeName="ENERGIAModel.tbUsuario">
+              <MappingFragment StoreEntitySet="tbUsuarios">
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Estrato" ColumnName="Estrato" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

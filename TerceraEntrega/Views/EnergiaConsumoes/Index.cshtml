@@ -1,0 +1,51 @@
+﻿@model IEnumerable<TerceraEntrega.tbEnergiaConsumo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Periodo_consumo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Meta_ahorro_energia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Consumo_actual_energia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbUsuario.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Periodo_consumo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Meta_ahorro_energia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Consumo_actual_energia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbUsuario.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idUsuario }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idUsuario }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idUsuario })
+        </td>
+    </tr>
+}
+
+</table>

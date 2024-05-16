@@ -1,0 +1,42 @@
+﻿@model TerceraEntrega.tbConsumoAgua
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tbConsumoAgua</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Promedio_consumo_agua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Promedio_consumo_agua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Consumo_actual_agua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Consumo_actual_agua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tbUsuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tbUsuario.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idUsuario }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
